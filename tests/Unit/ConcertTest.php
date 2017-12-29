@@ -10,7 +10,8 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ConcertTest extends TestCase
 {
-
+    use DatabaseMigrations;
+    
     public function test_can_get_formatted_date()
     {
         
@@ -50,6 +51,15 @@ class ConcertTest extends TestCase
 
     public function test_concerts_with_a_published_at_date_are_published()
     {
-        
+        $publishedConcertA = factory(Concert::class)->create(['published_at' => Carbon::parse("-1 week")]);
+        $publishedConcertB = factory(Concert::class)->create(['published_at' => Carbon::parse("-1 week")]);
+        $unpublishedConcert = factory(Concert::class)->create(['published_at' => null]);
+
+        $publishedConcerts = Concert::published()->get();
+
+        $this->assertTrue($publishedConcerts->Contains($publishedConcertA));
+        $this->assertTrue($publishedConcerts->Contains($publishedConcertB));
+        $this->assertFalse($publishedConcerts->Contains($unpublishedConcert));
+
     }
 }
