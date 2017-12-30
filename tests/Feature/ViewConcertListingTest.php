@@ -14,7 +14,8 @@ class ViewConcertListingTest extends TestCase
 
     use DatabaseMigrations;
 
-    public function test_user_can_view_a_published_concert_listing()
+    /** @test */
+    public function user_can_view_a_published_concert_listing()
     {
         // Arrange
         // Create a concert 
@@ -49,7 +50,8 @@ class ViewConcertListingTest extends TestCase
 
     }
 
-    public function test_user_cannot_view_unpublished_conceret_listing(){
+    /** @test */
+    public function user_cannot_view_unpublished_conceret_listing(){
 
         $concert = factory(Concert::class)->states('unpublished')->create();
 
@@ -57,4 +59,6 @@ class ViewConcertListingTest extends TestCase
 
         $response->assertStatus(404);
     }
+
+    
 }
