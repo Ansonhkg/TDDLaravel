@@ -54,9 +54,9 @@ class ViewConcertListingTest extends TestCase
     public function user_cannot_view_unpublished_conceret_listing(){
 
         $concert = factory(Concert::class)->states('unpublished')->create();
-
+        
         $response = $this->get('/concerts/'.$concert->id);
-
+        
         $response->assertStatus(404);
     }
 

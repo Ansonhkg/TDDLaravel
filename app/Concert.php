@@ -30,4 +30,9 @@ class Concert extends Model
         return $query->whereNotNull('published_at');    
     }
 
+    // public function scopeOrders($query)
+    // {
+    //     return $query->whereNotNull('orders');
+    // }
+
 }
